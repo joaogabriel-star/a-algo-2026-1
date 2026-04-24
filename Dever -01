@@ -1,0 +1,40 @@
+import random #gerar numeros aleatorios
+import time #medir tempo
+
+def insertion_sort(lista): #cria um algoritmo chamado insertion sort, lista é o parametro de entrada
+
+  for i in range(1, len(lista)): # len vem de length #repete o codigo percorrendo os indices da lista ate o ultimo indice
+
+    chave = lista[i] #guarda o valor atual para organizar no lugar certo
+    j = i - 1 #compara o valor atual com o valor anterior
+
+    while j >= 0 and lista[j] > chave: #enquanto ainda tem elementos, e o numero anterior é maior, é necessário empurrar
+      lista[j + 1] = lista[j] #move o numero uma posição para a direita
+      j = j - 1 #compara com o proximo anterior
+
+    lista[j + 1] = chave #quando o while termina, achamos o lugar certo, entao o numero é inserido
+
+  return lista
+def gerar_lista(n):
+  return [random.randint(0,100000) for _ in range(n)] # cria uma lista com n numeros aleatorios
+
+tamanhos = [1000, 5000, 10000, 20000, 50000] #lista de tamanhos
+
+for n in tamanhos: #para cada indice na lista de tamanhos:
+
+  lista = gerar_lista(n) #chama função, cria lista
+  copia = lista.copy() #cria uma copia da lista desorganizada, para o sorted organizar depois
+
+  inicio = time.time() #guarda o tempo antes do insertion sort
+  insertion_sort(lista) #organiza a lista
+  fim = time.time() #guarda o tempo depois do insertion sort
+
+  print("Insertion Sort - n =", n, "tempo =", fim - inicio) #fim - inicio = tempo tomado pelo insertion sort
+
+  inicio = time.time() #guarda o tempo antes do sorted
+  sorted(copia) #organiza a lista usando a função nativa do python
+  fim = time.time() #guarda o tempo depois do sorted
+
+  print("Sorted (Timsort) - n =", n, "tempo =", fim - inicio)
+
+  print("--------------------------------------------------")
