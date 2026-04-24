@@ -1,0 +1,24 @@
+def eh_palindromo(lista, inicio, fim):  #cria uma funcao que recebe o array (lista), a posição inicial (inicio) e a posição final (fim)
+
+  if inicio >= fim:  #verifica os indices na lista ou se chegou no meio da lista
+    return True
+
+  if lista[inicio] != lista[fim]:  #se os extremos da lista são diferentes não é palindromo
+    return False
+
+  return eh_palindromo(lista, inicio + 1, fim - 1)  #recursão, continua verificando os próximos da esquerda e da direita
+
+#testes
+array1 = [0, 1, 2, 3, 2, 1, 0]
+array2 = ["a", "b", "b", "a"]
+array3 = ["a", "b", "c", "b", "a"]
+array4 = ["a", "b", "c", "f", "b", "a"]
+
+arrays = [array1, array2, array3, array4]
+
+for i, arr in enumerate(arrays, 1):  #percorre os arrays enumerados
+
+  if eh_palindromo(arr, 0, len(arr) - 1):  #chama a função com inicio = 0 e fim = ultimo indice
+    print("array", i, "-", arr, "-> É palíndromo")
+  else:
+    print("array", i, "-", arr, "-> Não é palíndromo")
