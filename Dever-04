@@ -1,16 +1,13 @@
-1) Merge Sort:
-T(n) = 2T(n/2) + n
-→ O(n log n)
+import math
 
-2) Multiplicação de matrizes:
-T(n) = 8T(n/2) + n²
-→ O(n³)
+def F(n):
+  if n == 1:
+    return 2
 
-3a) T(n) = 2T(n/4) + √n
-→ O(√n log n)
+  return 2 * F(n - 1) + n**2
 
-3b) T(n) = 2T(n/4) + n
-→ O(n)
+n = int(input("Digite o valor de n: "))
 
-3c) T(n) = 16T(n/4) + n²
-→ O(n² log n)
+resultado = F(n)
+
+print("F(", n, ") =", resultado)
