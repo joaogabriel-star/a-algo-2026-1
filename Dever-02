@@ -1,13 +1,32 @@
-def soma_naturais(n):
-  if n == 1:
+import time  #mede o tempo de execução
+
+def fatorial(n):  #cria uma função chamada fatorial, recebe um numero n
+
+    if n == 0 or n == 1:  #condição de parada da recursão
         return 1
-  else:
-        return n + soma_naturais(n - 1)
+    
+    return n * fatorial(n - 1)  #a função chama ela mesma, é o que calcula o fatorial
 
-numero = int(input("Digite um número inteiro positivo: ")) 
+valores = [10, 100, 500, 1000]  #lista com os valores dos testes
 
-if numero < 1:
-    print("Por favor, insira um número inteiro positivo maior ou igual a 1.")
-else:
-  resultado = soma_naturais(numero)
-  print(f"A soma dos números naturais de 1 a {numero} é {resultado}.")
+for n in valores:  #loop para cada valor da lista
+
+    inicio = time.time()  #mede o tempo inicial, antes do calculo
+
+    try:  #tenta executar o respectivo codigo, se nao for possivel, vai para o except
+        resultado = fatorial(n)  #calcula o fatorial de n
+
+        fim = time.time()  #mede o tempo final, depois do calculo
+
+        print("n =", n)  #imprime o valor que esta sendo testado
+
+        if n <= 100:  #para o resultado não ficar enorme, é utilizada uma condição: se o numero for muito grrande, será impresso somente o numero de digitos no resultado
+            print("fatorial =", resultado)
+        else:
+            print("numero de digitos =", len(str(resultado)))  #transforma o resultado em texto e conta quantos digitos
+
+        print("tempo =", fim - inicio)  #tempo de execução
+
+    except RecursionError:  #se o limite de recursão for atingido, será exibido uma mensagem de erro
+        print("n =", n)
+        print("Erro: limite de recursao excedido")
